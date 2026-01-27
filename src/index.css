@@ -1,0 +1,266 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Noto+Sans+Tamil:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Wayora Digital Brutalism Design System */
+    --background: 0 0% 96%; /* Off-white #F5F5F5 */
+    --foreground: 0 0% 10%; /* Deep Black #1A1A1A */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    /* Kanchipuram Gold */
+    --primary: 43 65% 52%; /* #D4AF37 */
+    --primary-foreground: 0 0% 10%;
+
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 10%;
+
+    --muted: 0 0% 90%;
+    --muted-foreground: 0 0% 40%;
+
+    /* Accent - Gold variant */
+    --accent: 43 65% 52%;
+    --accent-foreground: 0 0% 10%;
+
+    /* Kumkum Red for destructive/alerts */
+    --destructive: 0 100% 27%; /* #8B0000 */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 10%;
+    --input: 0 0% 10%;
+    --ring: 43 65% 52%;
+
+    /* Brutalist Design Tokens */
+    --radius: 7px;
+    --border-width: 1.5px;
+    --shadow-offset: 4px;
+
+    /* Sidebar tokens */
+    --sidebar-background: 0 0% 96%;
+    --sidebar-foreground: 0 0% 10%;
+    --sidebar-primary: 43 65% 52%;
+    --sidebar-primary-foreground: 0 0% 10%;
+    --sidebar-accent: 0 0% 90%;
+    --sidebar-accent-foreground: 0 0% 10%;
+    --sidebar-border: 0 0% 10%;
+    --sidebar-ring: 43 65% 52%;
+  }
+
+  .dark {
+    --background: 0 0% 10%;
+    --foreground: 0 0% 96%;
+    --card: 0 0% 15%;
+    --card-foreground: 0 0% 96%;
+    --popover: 0 0% 15%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 43 65% 52%;
+    --primary-foreground: 0 0% 10%;
+    --secondary: 0 0% 20%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 60%;
+    --accent: 43 65% 52%;
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 100% 27%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 96%;
+    --input: 0 0% 96%;
+    --ring: 43 65% 52%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  .font-tamil {
+    font-family: 'Noto Sans Tamil', sans-serif;
+  }
+}
+
+@layer components {
+  /* Brutalist Card */
+  .brutalist-card {
+    @apply bg-card rounded-[7px] border-[1.5px] border-foreground;
+    box-shadow: 4px 4px 0px 0px hsl(var(--foreground));
+  }
+
+  .brutalist-card:hover {
+    box-shadow: 6px 6px 0px 0px hsl(var(--foreground));
+    transform: translate(-2px, -2px);
+  }
+
+  .brutalist-card:active {
+    box-shadow: 2px 2px 0px 0px hsl(var(--foreground));
+    transform: translate(2px, 2px);
+  }
+
+  /* Brutalist Button */
+  .brutalist-btn {
+    @apply rounded-[7px] border-[1.5px] border-foreground font-semibold transition-all duration-150;
+    box-shadow: 4px 4px 0px 0px hsl(var(--foreground));
+  }
+
+  .brutalist-btn:hover {
+    box-shadow: 6px 6px 0px 0px hsl(var(--foreground));
+    transform: translate(-2px, -2px);
+  }
+
+  .brutalist-btn:active {
+    box-shadow: 2px 2px 0px 0px hsl(var(--foreground));
+    transform: translate(2px, 2px);
+  }
+
+  .brutalist-btn-primary {
+    @apply brutalist-btn bg-primary text-primary-foreground;
+  }
+
+  .brutalist-btn-secondary {
+    @apply brutalist-btn bg-card text-foreground;
+  }
+
+  .brutalist-btn-dark {
+    @apply rounded-[7px] border-[1.5px] border-foreground bg-foreground text-background font-semibold transition-all duration-150;
+    box-shadow: 4px 4px 0px 0px hsl(var(--primary));
+  }
+
+  .brutalist-btn-dark:hover {
+    box-shadow: 6px 6px 0px 0px hsl(var(--primary));
+    transform: translate(-2px, -2px);
+  }
+
+  .brutalist-btn-dark:active {
+    box-shadow: 2px 2px 0px 0px hsl(var(--primary));
+    transform: translate(2px, 2px);
+  }
+
+  /* Brutalist Input */
+  .brutalist-input {
+    @apply rounded-[7px] border-[1.5px] border-foreground bg-card px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary;
+  }
+
+  /* Progress Bar */
+  .brutalist-progress {
+    @apply h-3 rounded-[7px] border-[1.5px] border-foreground bg-muted overflow-hidden;
+  }
+
+  .brutalist-progress-fill {
+    @apply h-full bg-foreground transition-all duration-500;
+  }
+
+  /* Quick Action Icon */
+  .quick-action {
+    @apply brutalist-card flex flex-col items-center justify-center gap-2 p-4 cursor-pointer transition-all duration-150;
+  }
+
+  /* Badge */
+  .brutalist-badge {
+    @apply inline-flex items-center rounded-[7px] border-[1.5px] border-foreground px-2.5 py-0.5 text-xs font-semibold;
+  }
+
+  /* Gold highlight text */
+  .text-gold {
+    color: hsl(var(--primary));
+  }
+
+  /* Red alert text */
+  .text-kumkum {
+    color: hsl(var(--destructive));
+  }
+
+  /* Mobile container */
+  .mobile-container {
+    @apply mx-auto max-w-[430px] min-h-screen bg-background relative overflow-hidden;
+  }
+
+  /* Tab bar */
+  .tab-bar {
+    @apply fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[430px] bg-card border-t-[1.5px] border-foreground px-2 py-2 z-50;
+  }
+
+  .tab-item {
+    @apply flex flex-col items-center justify-center gap-1 py-2 px-3 rounded-[7px] transition-all duration-150;
+  }
+
+  .tab-item.active {
+    @apply bg-foreground text-background;
+  }
+
+  .tab-item:not(.active) {
+    @apply text-muted-foreground hover:text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Brutalist shadow utility */
+  .shadow-brutal {
+    box-shadow: 4px 4px 0px 0px hsl(var(--foreground));
+  }
+
+  .shadow-brutal-gold {
+    box-shadow: 4px 4px 0px 0px hsl(var(--primary));
+  }
+
+  .shadow-brutal-sm {
+    box-shadow: 2px 2px 0px 0px hsl(var(--foreground));
+  }
+
+  .shadow-brutal-lg {
+    box-shadow: 6px 6px 0px 0px hsl(var(--foreground));
+  }
+
+  /* Leaflet Custom Styles */
+  .leaflet-popup-content-wrapper {
+    @apply rounded-[7px] border-[1.5px] border-foreground bg-card p-0;
+    box-shadow: 4px 4px 0px 0px hsl(var(--foreground));
+  }
+
+  .leaflet-popup-content {
+    margin: 0 !important;
+    min-width: 220px;
+  }
+
+  .leaflet-popup-tip-container {
+    display: none;
+  }
+
+  .leaflet-popup-close-button {
+    @apply text-foreground hover:text-primary;
+    font-size: 18px !important;
+    padding: 8px !important;
+  }
+
+  .leaflet-container {
+    font-family: 'Space Grotesk', sans-serif;
+  }
+
+  /* Custom Marker Styles */
+  .custom-marker {
+    background: transparent !important;
+    border: none !important;
+  }
+
+  /* Hide scrollbar for carousels */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
