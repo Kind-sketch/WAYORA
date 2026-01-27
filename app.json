@@ -1,0 +1,28 @@
+{
+  "expo": {
+    "name": "Wayora",
+    "slug": "wayora-travel",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#ea580c"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.wayora.travel"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#ea580c"
+      },
+      "package": "com.wayora.travel"
+    },
+    "web": {
+    }
+  }
+}
