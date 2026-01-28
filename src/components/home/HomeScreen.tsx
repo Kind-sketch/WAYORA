@@ -11,11 +11,8 @@ interface HomeScreenProps {
 
 export const HomeScreen = ({ onNavigate }: HomeScreenProps) => {
   const handleActionClick = (action: string) => {
-    if (action === "route") {
-      onNavigate("planner");
-    } else if (action === "atlas") {
-      onNavigate("atlas");
-    }
+    // Pass all action IDs to the navigation handler
+    onNavigate(action);
   };
 
   return (

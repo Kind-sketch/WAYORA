@@ -66,6 +66,15 @@ export interface CulturalTip {
     category: 'temple' | 'general' | 'food' | 'transport';
 }
 
+export interface Notification {
+    id: string;
+    type: 'trip' | 'deal' | 'weather' | 'xp' | 'tip' | 'system';
+    title: string;
+    message: string;
+    read: boolean;
+    timestamp: string;
+}
+
 // ============================================================================
 // STORAGE KEYS
 // ============================================================================
