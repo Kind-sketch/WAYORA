@@ -10,6 +10,8 @@ import { ProfileScreen } from "../components/profile/ProfileScreen";
 import { ExploriaScreen } from "../components/gamification/ExploriaScreen";
 import { WayoraAssistant } from "../components/assistant/WayoraAssistant";
 import { TripAtlas } from "../components/atlas/TripAtlas";
+import { BookingScreen } from "../components/booking/BookingScreen";
+import { EmergencyScreen } from "../components/emergency/EmergencyScreen";
 import { SplashScreen } from "../components/ui/SplashScreen";
 import { OnboardingFlow } from "../components/onboarding/OnboardingFlow";
 
@@ -37,6 +39,10 @@ const Index = () => {
     if (["home", "explore", "planner", "budget", "profile"].includes(screen)) {
       setActiveTab(screen);
       setSubScreen(null);
+    } else if (screen === "route") {
+      // "AI Route" quick action navigates to planner tab
+      setActiveTab("planner");
+      setSubScreen(null);
     } else {
       setSubScreen(screen);
     }
@@ -60,6 +66,12 @@ const Index = () => {
     }
     if (subScreen === "atlas") {
       return <TripAtlas onBack={handleBack} />;
+    }
+    if (subScreen === "bookings") {
+      return <BookingScreen onBack={handleBack} />;
+    }
+    if (subScreen === "emergency") {
+      return <EmergencyScreen onBack={handleBack} />;
     }
 
     // Main tab screens
