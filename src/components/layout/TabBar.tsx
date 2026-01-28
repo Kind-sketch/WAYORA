@@ -1,4 +1,4 @@
-import { Home, Compass, Route, Wallet, User } from "lucide-react";
+import { Home, Compass, Map, Wallet, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface TabBarProps {
@@ -7,34 +7,45 @@ interface TabBarProps {
 }
 
 const tabs = [
-  { id: "home", icon: Home, label: "Home", tamilLabel: "வீடு" },
-  { id: "explore", icon: Compass, label: "Explore", tamilLabel: "ஆராய்க" },
-  { id: "planner", icon: Route, label: "AI Plan", tamilLabel: "திட்டம்" },
-  { id: "budget", icon: Wallet, label: "Budget", tamilLabel: "பட்ஜெட்" },
-  { id: "profile", icon: User, label: "Profile", tamilLabel: "சுயவிவரம்" },
+  { id: "home", icon: Home, label: "Home" },
+  { id: "explore", icon: Compass, label: "Explore" },
+  { id: "planner", icon: Map, label: "Plan" },
+  { id: "budget", icon: Wallet, label: "Budget" },
+  { id: "profile", icon: User, label: "Profile" },
 ];
 
 export const TabBar = ({ activeTab, onTabChange }: TabBarProps) => {
   return (
-    <div className="tab-bar">
+    <nav className="tab-bar">
       <div className="flex items-center justify-around">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
-          
+
           return (
             <motion.button
               key={tab.id}
-              className={`tab-item ${isActive ? "active" : ""}`}
+              className={`tab-item relative ${isActive ? "active" : ""}`}
               onClick={() => onTabChange(tab.id)}
-              whileTap={{ scale: 0.95 }}
+              whileTap={{ scale: 0.9 }}
             >
-              <Icon size={20} strokeWidth={2.5} />
-              <span className="text-[10px] font-semibold">{tab.label}</span>
+              {isActive && (
+                <motion.div
+                  className="absolute inset-0 bg-primary rounded-xl"
+                  layoutId="activeTab"
+                  transition={{ type: "spring", bounce: 0.2, duration: 0.4 }}
+                />
+              )}
+              <span className="relative z-10">
+                <Icon size={20} strokeWidth={2} />
+              </span>
+              <span className={`text-[10px] font-medium relative z-10 ${isActive ? 'text-primary-foreground' : ''}`}>
+                {tab.label}
+              </span>
             </motion.button>
           );
         })}
       </div>
-    </div>
+    </nav>
   );
 };

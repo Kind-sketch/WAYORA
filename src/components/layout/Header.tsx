@@ -1,6 +1,7 @@
-import { Bell, Menu, Sparkles, Zap } from "lucide-react";
+import { Bell, Menu, Sparkles, Zap, Moon, Sun } from "lucide-react";
 import { motion } from "framer-motion";
 import { useUserStats } from "@/hooks/useUserStats";
+import { useState, useEffect } from "react";
 
 interface HeaderProps {
   title: string;
@@ -12,22 +13,43 @@ interface HeaderProps {
 
 export const Header = ({ title, tamilTitle, showBack, onBack, onNavigate }: HeaderProps) => {
   const { stats } = useUserStats();
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check for saved preference
+    const savedTheme = localStorage.getItem("wayora_theme");
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      setIsDark(true);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    if (isDark) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("wayora_theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("wayora_theme", "dark");
+    }
+    setIsDark(!isDark);
+  };
 
   return (
     <motion.header
-      className="flex items-center justify-between px-5 py-4 bg-card border-b-[1.5px] border-foreground"
+      className="flex items-center justify-between px-5 py-4 bg-card/80 backdrop-blur-xl border-b border-foreground/10 sticky top-0 z-40"
       initial={{ y: -20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       <div className="flex items-center gap-3">
-        <button className="brutalist-btn-secondary p-2">
-          <Menu size={20} strokeWidth={2.5} />
+        <button className="brutalist-btn-secondary p-2.5 rounded-xl">
+          <Menu size={20} strokeWidth={2} />
         </button>
         <div>
-          <h1 className="text-xl font-bold tracking-tight">{title}</h1>
+          <h1 className="text-xl font-bold tracking-tight text-foreground">{title}</h1>
           {tamilTitle && (
-            <p className="text-xs text-muted-foreground font-tamil">{tamilTitle}</p>
+            <p className="text-xs text-primary font-tamil">{tamilTitle}</p>
           )}
         </div>
       </div>
@@ -35,7 +57,7 @@ export const Header = ({ title, tamilTitle, showBack, onBack, onNavigate }: Head
       <div className="flex items-center gap-2">
         {/* XP Badge */}
         <motion.button
-          className="brutalist-btn-secondary px-2 py-1.5 flex items-center gap-1"
+          className="brutalist-btn-secondary px-3 py-2 flex items-center gap-1.5 rounded-xl"
           onClick={() => onNavigate?.("exploria")}
           whileTap={{ scale: 0.95 }}
         >
@@ -45,17 +67,26 @@ export const Header = ({ title, tamilTitle, showBack, onBack, onNavigate }: Head
 
         {/* AI Assistant */}
         <motion.button
-          className="brutalist-btn-primary p-2"
+          className="brutalist-btn-primary p-2.5 rounded-xl"
           onClick={() => onNavigate?.("assistant")}
           whileTap={{ scale: 0.95 }}
         >
-          <Sparkles size={20} strokeWidth={2.5} />
+          <Sparkles size={18} strokeWidth={2} />
+        </motion.button>
+
+        {/* Theme Toggle */}
+        <motion.button
+          className="brutalist-btn-secondary p-2.5 rounded-xl"
+          onClick={toggleTheme}
+          whileTap={{ scale: 0.95 }}
+        >
+          {isDark ? <Sun size={18} strokeWidth={2} /> : <Moon size={18} strokeWidth={2} />}
         </motion.button>
 
         {/* Notifications */}
-        <button className="brutalist-btn-secondary p-2 relative">
-          <Bell size={20} strokeWidth={2.5} />
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-destructive rounded-full border border-foreground" />
+        <button className="brutalist-btn-secondary p-2.5 rounded-xl relative">
+          <Bell size={18} strokeWidth={2} />
+          <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-accent rounded-full border-2 border-card" />
         </button>
       </div>
     </motion.header>
